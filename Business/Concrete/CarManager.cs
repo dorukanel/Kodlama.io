@@ -4,6 +4,7 @@ using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace Business.Concrete
 {
@@ -14,24 +15,12 @@ namespace Business.Concrete
         {
             _carDal = carDal;
         }
-        public void Add(Car car)
-        {
-            
-        }
-
-        public void Delete(Car car)
-        {
-            throw new NotImplementedException();
-        }
 
         public List<Car> GetAll()
         {
             return _carDal.GetAll();
         }
 
-        public void Update(Car car)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

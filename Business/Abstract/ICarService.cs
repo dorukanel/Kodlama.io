@@ -12,5 +12,10 @@ namespace Business.Abstract
         List<Car> GetCarsByBrandId(int brandId);
 
         List<Car> GetCarsByColorId(int colorId);
+
+        void Add(Car car);
+        void delete(Car car);
+        void update(Car car);
+
     }
 }

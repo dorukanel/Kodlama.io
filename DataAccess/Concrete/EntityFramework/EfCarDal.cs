@@ -14,25 +14,20 @@ namespace DataAccess.Concrete.EntityFramework
         public void Add(Car entity)
         {
             //IDisposable pattern implementation of c#
-            if (entity.Description.Length > 2 && entity.DailyPrice > 0)
-            {
                 using (DorukanAracContext context = new DorukanAracContext())
                 {
                     var addedEntity = context.Entry(entity);
                     addedEntity.State = EntityState.Added;
                     context.SaveChanges();
                 }
-            }
-            else
-                Console.WriteLine("Girdiginiz değerlere uyan bir araç olamaz.");
+            
         }
 
         public void Delete(Car entity)
         {
             using (DorukanAracContext context = new DorukanAracContext())
             {
-                var deletedEntity = context.Entry(entity);
-                deletedEntity.State = EntityState.Deleted;
+                context.Cars.Remove(context.Cars.SingleOrDefault(c => c.CarId == entity.CarId));
                 context.SaveChanges();
             }
         }
@@ -59,8 +54,12 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (DorukanAracContext context = new DorukanAracContext())
             {
-                var updatedEntity = context.Entry(entity);
-                updatedEntity.State = EntityState.Modified;
+                var carToUpdate = context.Cars.SingleOrDefault(c => c.CarId == entity.CarId);
+                carToUpdate.BrandId = entity.BrandId;
+                carToUpdate.ColorId = entity.ColorId;
+                carToUpdate.DailyPrice = entity.DailyPrice;
+                carToUpdate.Description = entity.Description;
+                carToUpdate.ModelYear = entity.ModelYear;
                 context.SaveChanges();
             }
         }

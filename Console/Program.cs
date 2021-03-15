@@ -18,15 +18,7 @@ namespace ConsoleUI
             {
                 Console.WriteLine(car.Description);
             }
-            EfCarDal efCarDal = new EfCarDal();
-            Car car1 = new Car();
-            car1.BrandId = 2;
-            car1.CarId = 7;
-            car1.ColorId = 4;
-            car1.DailyPrice = 0;
-            car1.ModelYear = 2015;
-            car1.Description = "Mercedes Keto";
-            efCarDal.Add(car1);
+            carManager.delete(new Car {CarId=12, BrandId = 1, ColorId = 1, DailyPrice = 3, Description = "Trash", ModelYear = 1990 });
         }
     }
 }

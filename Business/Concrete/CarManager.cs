@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using Entities.DTOs;
 
 namespace Business.Concrete
 {
@@ -18,7 +19,7 @@ namespace Business.Concrete
 
         public void Add(Car car)
         {
-            if(car.DailyPrice>0 &&car.Description.Length>2)
+            if(car.DailyPrice>0 &&car.CarName.Length>2)
             {
                 _carDal.Add(car);
             }
@@ -49,6 +50,10 @@ namespace Business.Concrete
         public void update(Car car)
         {
             _carDal.Update(car);
+        }
+        public List<CarDetailDto> GetCarDetails()
+        {
+            return _carDal.GetCarDetails();
         }
     }
 }

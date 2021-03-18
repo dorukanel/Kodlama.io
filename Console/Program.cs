@@ -10,15 +10,15 @@ using System.Text;
 namespace ConsoleUI
 {
     class Program
-    {
+    {   
+        // CRUD OPERASYONLARI CALISIYOR denemek için uğraşmadım :)
         static void Main(string[] args)
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetCarsByBrandId(2))
+            foreach (var car in carManager.GetCarDetails())
             {
-                Console.WriteLine(car.Description);
+                Console.WriteLine("{0}/{1}/{2}/{3}\n",car.CarName,car.ColorName,car.BrandName,car.DailyPrice);
             }
-            carManager.delete(new Car {CarId=12, BrandId = 1, ColorId = 1, DailyPrice = 3, Description = "Trash", ModelYear = 1990 });
         }
     }
 }

@@ -13,5 +13,6 @@ namespace Business.Abstract
         IResult Add(User user);
         IResult delete(User user);
         IResult update(User user);
+        IDataResult<User> GetById(int id);
     }
 }

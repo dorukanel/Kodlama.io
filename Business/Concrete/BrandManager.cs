@@ -5,6 +5,7 @@ using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Business.Concrete
@@ -30,14 +31,14 @@ namespace Business.Concrete
            
         }
 
-        public IDataResult<List<Brand>> GetAll()
+        public IDataResult<List<Brand>> GetAll(Expression<Func<Brand, bool>> filter = null)
         {
             return new SuccessDataResult<List<Brand>>(_brandDal.GetAll());
         }
 
         public IDataResult<Brand> GetBrandById(int brandId)
         {
-            return new SuccessDataResult<Brand>(_brandDal.Get(b => b.BrandId == brandId));
+            return new SuccessDataResult<Brand>(_brandDal.Get(b=>b.BrandId==brandId));
         }
 
         public IResult update(Brand brand)

@@ -8,6 +8,7 @@ using System.Linq;
 using Entities.DTOs;
 using Core.Utilities.Results;
 using Business.Constants;
+using System.Linq.Expressions;
 
 namespace Business.Concrete
 {
@@ -45,13 +46,13 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>> (_carDal.GetAll());
         }
 
-        public IDataResult<List<Car>> GetCarsByBrandId(int brandId)
+        public IDataResult<List<CarDetailDto>> GetCarsByBrandId(int brandId)
         {
             if (DateTime.Now.Hour == 23)
             {
-                return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
+                return new ErrorDataResult<List<CarDetailDto>>(Messages.MaintenanceTime);
             }
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.BrandId == brandId));
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.BrandId == brandId));
             
         }
 
@@ -70,7 +71,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarUpdated);
             
         }
-        public IDataResult<List<CarDetailDto>> GetCarDetails()
+        public IDataResult<List<CarDetailDto>> GetCarDetails(Expression<Func<Car, bool>> filter = null)
         {
             if (DateTime.Now.Hour == 23)
             {

@@ -39,5 +39,9 @@ namespace Business.Concrete
             _colorDal.Update(color);
             return new SuccessResult(Messages.ColorUpdated);
         }
+        public IDataResult<Color> GetColorById(int colorid)
+        {
+            return new SuccessDataResult<Color>(_colorDal.Get(c => c.ColorId == colorid));
+        }
     }
 }

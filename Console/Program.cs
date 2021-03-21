@@ -19,7 +19,7 @@ namespace ConsoleUI
             // AddCar(); 
             // DeleteCar();
             //UpdateCar();
-            //ShowCarsByColorId();
+            //ShowCarsByColorId(3);
             //GetAllCars();
             //GetCarById();
             // ShowAllBrands();
@@ -202,10 +202,10 @@ namespace ConsoleUI
          
         }
 
-        private static void GetCarById()
+        private static void GetCarById(int id)
         {
             CarManager carManager = new CarManager(new EfCarDal());
-             Console.WriteLine(carManager.GetCarById(2).Data.CarName + " " + carManager.GetCarById(2).Data.DailyPrice);
+             Console.WriteLine(carManager.GetCarById(id).Data.CarName + " " + carManager.GetCarById(2).Data.DailyPrice);
             
         }
 
@@ -219,11 +219,11 @@ namespace ConsoleUI
             
         }
 
-        private static void ShowCarsByColorId()
+        private static void ShowCarsByColorId(int colorid)
         {
             CarManager carManager = new CarManager(new EfCarDal());
 
-            foreach (var car in carManager.GetCarsByColorId(3).Data)
+            foreach (var car in carManager.GetCarsByColorId(colorid).Data)
             {
                 Console.WriteLine(car.CarName);
             }
@@ -251,10 +251,10 @@ namespace ConsoleUI
             Console.WriteLine(result.Message);
         }
 
-        private static void ShowCarsByBrandId()
+        private static void ShowCarsByBrandId(int brandid)
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetCarsByBrandId(2).Data)
+            foreach (var car in carManager.GetCarsByBrandId(brandid).Data)
             {
                 Console.WriteLine(car.CarName);
             }

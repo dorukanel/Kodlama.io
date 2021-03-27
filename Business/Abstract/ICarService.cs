@@ -19,7 +19,7 @@ namespace Business.Abstract
         IResult Add(Car car);
         IResult delete(Car car);
         IResult update(Car car);
-        IDataResult<List<CarDetailDto>> GetCarDetails(Expression<Func<Car, bool>> filter = null );
+        IDataResult<List<CarDetailDto>> GetCarDetails();
 
     }
 }

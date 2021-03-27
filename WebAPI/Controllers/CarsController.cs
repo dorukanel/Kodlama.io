@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Concrete;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -6,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 
 namespace WebAPI.Controllers
 {
@@ -40,13 +43,6 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-       /* [HttpGet("getbycolorid")]
-        public IActionResult GetByColorId(int colorId)
-        {
-            var result = _carManager.GetCarsByColorId(colorId);
-
-            return StatusCode(result.Success ? 200 : 400, result);
-        }*/
        [HttpPost("add")]
        public IActionResult Add(Car car)
         {
@@ -81,7 +77,7 @@ namespace WebAPI.Controllers
         [HttpGet("getcardetails")]
                 public IActionResult GetCarDetails(int id)
         {
-            var result = _carManager.GetCarDetails(c=>c.CarId==id);
+            var result = _carManager.GetCarDetails();
             if(result.Success)
             {
                 return Ok(result);

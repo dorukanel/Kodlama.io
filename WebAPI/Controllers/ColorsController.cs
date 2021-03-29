@@ -13,61 +13,71 @@ namespace WebAPI.Controllers
     [ApiController]
     public class ColorsController : ControllerBase
     {
-        IColorService _colorManager;
+        IColorService _colorService;
 
-        public ColorsController(IColorService colorManager)
+        public ColorsController(IColorService colorService)
         {
-            _colorManager = colorManager;
+            _colorService = colorService;
         }
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            var result = _colorManager.GetAll();
-            if(result.Success)
+            var result = _colorService.GetAll();
+
+            if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
+
         }
         [HttpGet("getbyid")]
         public IActionResult GetById(int id)
         {
-            var result = _colorManager.GetColorById(id);
-            if(result.Success)
+            var result = _colorService.GetColorById(id);
+
+            if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
+
         }
         [HttpPost("add")]
         public IActionResult Add(Color color)
         {
-            var result = _colorManager.Add(color);
-            if(result.Success)
+            var result = _colorService.Add(color);
+
+            if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
+
         }
         [HttpPost("delete")]
         public IActionResult Delete(Color color)
         {
-            var result = _colorManager.delete(color);
-            if(result.Success)
+            var result = _colorService.delete(color);
+
+            if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
+
         }
         [HttpPost("update")]
         public IActionResult Update (Color color)
         {
-            var result = _colorManager.update(color);
-            if(result.Success)
+            var result = _colorService.update(color);
+
+            if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
+
         }
     }
 }

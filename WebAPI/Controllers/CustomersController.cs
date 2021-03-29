@@ -13,65 +13,75 @@ namespace WebAPI.Controllers
     [ApiController]
     public class CustomersController : ControllerBase
     {
-        ICustomerService _customerManager;
+        ICustomerService _customerService;
 
-        public CustomersController(ICustomerService customerManager)
+        public CustomersController(ICustomerService customerService)
         {
-            _customerManager = customerManager;
+            _customerService = customerService;
         }
 
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            var result = _customerManager.GetAll();
+            var result = _customerService.GetAll();
+
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
+
         }
-       
-        
+
+
         [HttpPost("add")]
         public IActionResult Add(Customer customer)
         {
-            var result = _customerManager.Add(customer);
+            var result = _customerService.Add(customer);
+
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
+
         }
         [HttpPost("delete")]
         public IActionResult Delete(Customer customer)
         {
-            var result = _customerManager.delete(customer);
+            var result = _customerService.delete(customer);
+
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
+
         }
         [HttpPost("update")]
 
         public IActionResult Update(Customer customer)
         {
-            var result = _customerManager.update(customer);
+            var result = _customerService.update(customer);
+
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
+
         }
         [HttpGet("getcustomerdetails")]
         public IActionResult GetCustomerDetails()
         {
-            var result = _customerManager.GetCustomerDetails();
+            var result = _customerService.GetCustomerDetails();
+
             if (result.Success)
             {
                 return Ok(result);
             }
-            return BadRequest(result.Message);
+            return BadRequest(result);
+
         }
     }
 }

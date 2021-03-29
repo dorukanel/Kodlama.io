@@ -1,30 +1,25 @@
 ﻿using Business.Abstract;
-using Business.Concrete;
-using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BrandsController : ControllerBase
+    public class CarImagesController : ControllerBase
     {
-        IBrandService _brandService;
+        ICarImageService _carImageService;
 
-        public BrandsController(IBrandService brandService)
+        public CarImagesController(ICarImageService carImageService)
         {
-            _brandService = brandService;
+            _carImageService = carImageService;
         }
+
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            var result = _brandService.GetAll();
+            var result = _carImageService.GetAll();
 
             if (result.Success)
             {
@@ -32,22 +27,31 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-        [HttpGet("getbyid")]
         public IActionResult GetById(int id)
         {
-            var result = _brandService.GetBrandById(id);
+            var result = _carImageService.GetById(id);
 
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
+        }
+        [HttpGet("getbycarid")]
+        public IActionResult GetByCarId(int carId)
+        {
+            var result = _carImageService.GetAllByCarId(carId);
 
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result); 
         }
         [HttpPost("add")]
-        public IActionResult Add(Brand brand)
+        public IActionResult Add(CarImage carImage)
         {
-            var result = _brandService.Add(brand);
+            var result = _carImageService.Add(carImage);
 
             if (result.Success)
             {
@@ -55,29 +59,28 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-            [HttpPost("delete")]
-        public IActionResult Delete(Brand brand)
+        [HttpPost("delete")]
+        public IActionResult Delete(CarImage carImage)
         {
-            var result = _brandService.delete(brand);
+            var result = _carImageService.Delete(carImage);
 
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
-
         }
         [HttpPost("update")]
-        public IActionResult Update(Brand brand)
+        public IActionResult Update(CarImage carImage)
         {
-            var result = _brandService.update(brand);
+            var result = _carImageService.Update(carImage);
 
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
-
         }
+
     }
 }

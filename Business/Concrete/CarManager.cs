@@ -3,6 +3,7 @@ using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 //using DataAccess.Concrete.InMemory;
@@ -11,6 +12,7 @@ using Entities.DTOs;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Business.Concrete
@@ -18,9 +20,11 @@ namespace Business.Concrete
     public class CarManager : ICarService
     {
         ICarDal _carDal;
-        public CarManager(ICarDal carDal)
+        private ICarImageService _carImageService;
+        public CarManager(ICarDal carDal, ICarImageService carImageService)
         {
             _carDal = carDal;
+            _carImageService = carImageService;
         }
 
         [ValidationAspect(typeof(CarValidator))]
@@ -28,10 +32,14 @@ namespace Business.Concrete
         {
 
             _carDal.Add(car);
+            //IResult result = BusinessRules.Run(
+            //    //  CheckIfAnyImage(car.CarId),
+            //    //  CheckIfImageLimitSurpassed(car.CarId)
+            //    );
             return new SuccessResult(Messages.CarAdded);
         }
 
-        public IResult delete(Car car)
+        public IResult Delete(Car car)
         {
             _carDal.Delete(car);
             return new SuccessResult(Messages.CarDeleted);
@@ -40,33 +48,21 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>> GetAll()
         {
-            if (DateTime.Now.Hour == 5)
-            {
-                return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
-            }
             return new SuccessDataResult<List<Car>>(_carDal.GetAll());
         }
 
         public IDataResult<List<CarDetailDto>> GetCarsByBrandId(int brandId)
         {
-            if (DateTime.Now.Hour == 23)
-            {
-                return new ErrorDataResult<List<CarDetailDto>>(Messages.MaintenanceTime);
-            }
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.BrandId == brandId));
 
         }
 
         public IDataResult<List<Car>> GetCarsByColorId(int colorId)
         {
-            if (DateTime.Now.Hour == 23)
-            {
-                return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
-            }
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == colorId));
         }
 
-        public IResult update(Car car)
+        public IResult Update(Car car)
         {
             _carDal.Update(car);
             return new SuccessResult(Messages.CarUpdated);
@@ -74,10 +70,7 @@ namespace Business.Concrete
         }
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
-            if (DateTime.Now.Hour == 23)
-            {
-                return new ErrorDataResult<List<CarDetailDto>>(Messages.MaintenanceTime);
-            }
+
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
         }
 
@@ -85,5 +78,17 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<Car>(_carDal.Get(c => c.CarId == carId));
         }
+        /*private IResult CheckIfAnyImage(int carId)
+        {
+            var result = _carImageService.GetAll(c => c.CarId == carId);
+            if (result == null)
+            {
+                _carImageService.Add(new CarImage
+                {
+                    ImagePath = "//Resources//Images//DefaultImage.png"
+                });
+            }
+            return new SuccessResult(Messages.DefaultImageAdded);
+        }*/
     }
 }

@@ -29,6 +29,10 @@ namespace Business.Constants
         public static string RentalReturnDateError = "Araç şuanda kiradadır. ";
         public static string RentalNotAdded = "Kiralama eklenemedi.";
         public static string ReturnDateUpdate = "Araç iade tatihi güncellendi.";
-        
+        public static string CarImageDeleted = "Arac resmi başarıyla silinmiştir.";
+        public static string CarImageUpdated = "Arac resmi güncellendi.";
+        public static string CarImageAdded = "Arac resmi eklendi.";
+        public static string DefaultImageAdded = "Bu aracın resmi olmadığından şirket logosu resmi gönderildi.";
+        public static string AmountLimitOfImagesExceeded= "Bu araç için en daha fazla resim ekleyemezsiniz.";
     }
 }

@@ -14,64 +14,74 @@ namespace WebAPI.Controllers
     [ApiController]
     public class RentalsController : ControllerBase
     {
-        IRentalService _rentalManager;
+        IRentalService _rentalService;
 
-        public RentalsController(IRentalService rentalManager)
+        public RentalsController(IRentalService rentalService)
         {
-            _rentalManager = rentalManager;
+            _rentalService = rentalService;
         }
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            var result = _rentalManager.GetAll();
+            var result = _rentalService.GetAll();
+
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
+
         }
 
 
         [HttpPost("add")]
         public IActionResult Add(Rental rental)
         {
-            var result = _rentalManager.Add(rental);
+            var result = _rentalService.Add(rental);
+
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
+
         }
         [HttpPost("delete")]
         public IActionResult Delete(Rental rental)
         {
-            var result = _rentalManager.delete(rental);
+            var result = _rentalService.delete(rental);
+
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
+
         }
         [HttpPost("update")]
 
         public IActionResult Update(Rental rental)
         {
-            var result = _rentalManager.update(rental);
+            var result = _rentalService.update(rental);
+
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
+
         }
         [HttpGet("getrentaldetails")]
         public IActionResult GetCustomerDetails()
         {
-            var result = _rentalManager.GetRentDetails();
+            var result = _rentalService.GetRentDetails();
+
             if (result.Success)
             {
                 return Ok(result);
             }
-            return BadRequest(result.Message);
+            return BadRequest(result);
+
         }
     }
 }

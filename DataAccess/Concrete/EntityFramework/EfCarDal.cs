@@ -20,7 +20,7 @@ namespace DataAccess.Concrete.EntityFramework
                 var result = from c in context.Cars
                              join clr in context.Colors on c.ColorId equals clr.ColorId
                              join b in context.Brands on c.BrandId equals b.BrandId
-                             join ci in context.CarImages on c.CarId equals ci.CarId
+                             
 
                              select new CarDetailDto
                              {
@@ -28,7 +28,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  ColorName = clr.ColorName,
                                  BrandName = b.BrandName,
                                  DailyPrice = c.DailyPrice,
-                                 CarImages = context.CarImages.Where(ci => ci.CarId == c.CarId).ToList()
+                                 
                              };
 
 

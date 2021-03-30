@@ -42,7 +42,7 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        public IResult delete(Rental rental)
+        public IResult Delete(Rental rental)
         {
             _rentalDal.Delete(rental);
             return new SuccessResult(Messages.RentalDeleted);
@@ -60,7 +60,7 @@ namespace Business.Concrete
 
         }
 
-        public IResult update(Rental rental)
+        public IResult Update(Rental rental)
         {
              _rentalDal.Update(rental);
             return new SuccessResult(Messages.RentalUpdated);

@@ -55,7 +55,7 @@ namespace WebAPI.Controllers
         [HttpPost("delete")]
         public IActionResult Delete(User user)
         {
-            var result = _userService.delete(user);
+            var result = _userService.Delete(user);
 
             if (result.Success)
             {
@@ -66,7 +66,7 @@ namespace WebAPI.Controllers
         [HttpPost("update")]
         public IActionResult Update(User user)
         {
-            var result = _userService.update(user);
+            var result = _userService.Update(user);
 
             if (result.Success)
             {

@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
 namespace Entities.Concrete
 {
     public class CarImage:IEntity
@@ -10,6 +9,7 @@ namespace Entities.Concrete
         public int Id { get; set; }
         public int CarId { get; set; }
         public string ImagePath { get; set; }
-        public DateTime Date { get; set; } = DateTime.Now;
+        public DateTime? Date { get; set; } 
+        
     }
 }

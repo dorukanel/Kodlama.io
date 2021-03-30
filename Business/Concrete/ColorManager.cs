@@ -26,7 +26,7 @@ namespace Business.Concrete
 
         }
 
-        public IResult delete(Color color)
+        public IResult Delete(Color color)
         {
             _colorDal.Delete(color);
             return new SuccessResult(Messages.ColorDeleted);
@@ -37,7 +37,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Color>>(_colorDal.GetAll());
         }
 
-        public IResult update(Color color)
+        public IResult Update(Color color)
         {
             _colorDal.Update(color);
             return new SuccessResult(Messages.ColorUpdated);

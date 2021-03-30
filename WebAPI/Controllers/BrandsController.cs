@@ -35,14 +35,8 @@ namespace WebAPI.Controllers
         [HttpGet("getById")]
         public IActionResult GetById(int id)
         {
-            var result = _brandService.GetBrandById(id);
-
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-
+            var result = _brandService.GetById(id);
+            return StatusCode(result.Success ? 200 : 400, result);
         }
         [HttpPost("add")]
         public IActionResult Add(Brand brand)
@@ -58,7 +52,7 @@ namespace WebAPI.Controllers
             [HttpPost("delete")]
         public IActionResult Delete(Brand brand)
         {
-            var result = _brandService.delete(brand);
+            var result = _brandService.Delete(brand);
 
             if (result.Success)
             {
@@ -70,7 +64,7 @@ namespace WebAPI.Controllers
         [HttpPost("update")]
         public IActionResult Update(Brand brand)
         {
-            var result = _brandService.update(brand);
+            var result = _brandService.Update(brand);
 
             if (result.Success)
             {

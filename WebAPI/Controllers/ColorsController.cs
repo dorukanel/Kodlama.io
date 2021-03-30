@@ -58,7 +58,7 @@ namespace WebAPI.Controllers
         [HttpPost("delete")]
         public IActionResult Delete(Color color)
         {
-            var result = _colorService.delete(color);
+            var result = _colorService.Delete(color);
 
             if (result.Success)
             {
@@ -70,7 +70,7 @@ namespace WebAPI.Controllers
         [HttpPost("update")]
         public IActionResult Update (Color color)
         {
-            var result = _colorService.update(color);
+            var result = _colorService.Update(color);
 
             if (result.Success)
             {

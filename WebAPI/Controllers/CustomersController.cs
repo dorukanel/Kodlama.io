@@ -20,7 +20,7 @@ namespace WebAPI.Controllers
             _customerService = customerService;
         }
 
-        [HttpGet("getall")]
+        [HttpGet("getAll")]
         public IActionResult GetAll()
         {
             var result = _customerService.GetAll();
@@ -71,7 +71,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
 
         }
-        [HttpGet("getcustomerdetails")]
+        [HttpGet("getCustomerDetails")]
         public IActionResult GetCustomerDetails()
         {
             var result = _customerService.GetCustomerDetails();

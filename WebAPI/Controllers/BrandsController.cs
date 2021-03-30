@@ -21,7 +21,7 @@ namespace WebAPI.Controllers
         {
             _brandService = brandService;
         }
-        [HttpGet("getall")]
+        [HttpGet("getAll")]
         public IActionResult GetAll()
         {
             var result = _brandService.GetAll();
@@ -32,7 +32,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-        [HttpGet("getbyid")]
+        [HttpGet("getById")]
         public IActionResult GetById(int id)
         {
             var result = _brandService.GetBrandById(id);

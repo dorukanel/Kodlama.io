@@ -12,6 +12,11 @@ using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Business.Abstract;
 using Business.Concrete;
+using Core.Utilities.IoC;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Core.Utilities.Security.JWT;
+using Microsoft.IdentityModel.Tokens;
+using Core.Utilities.Security.Encryption;
 
 namespace WebAPI
 {
@@ -31,6 +36,24 @@ namespace WebAPI
             services.AddCors();
             //services.AddSingleton<ICarImageService, CarImageManager>();
             //services.AddSingleton<ICarImageDal, EfCarImageDal>();
+            services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
+            var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidIssuer = tokenOptions.Issuer,
+                        ValidAudience = tokenOptions.Audience,
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
+                    };
+                });
+            ServiceTool.Create(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

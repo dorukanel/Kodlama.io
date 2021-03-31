@@ -1,4 +1,4 @@
-﻿using Entities.Concrete;
+﻿using Core.Entity.Concrete;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(u => u.Email).EmailAddress();
             RuleFor(u => u.FirstName).NotEmpty();
             RuleFor(u => u.LastName).NotEmpty();
-            RuleFor(u => u.Password).NotEmpty();
+            //RuleFor(u => u.Password).NotEmpty();
         }
         //private bool IsValidPassword(String password, string regex) bir ara geri döneceğim sana
         //{

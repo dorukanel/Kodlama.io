@@ -1,13 +1,13 @@
-﻿using Business.Constants;
-using Castle.DynamicProxy;
-using Core.Extensions;
-using Core.Utilities.Interceptors;
+﻿using Core.Utilities.Interceptors;
 using Core.Utilities.IoC;
 using Microsoft.AspNetCore.Http;
 using System;
-using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 using System.Text;
+using Castle.DynamicProxy;
+using Microsoft.Extensions.DependencyInjection;
+using Core.Extensions;
+using Business.Constants;
 
 namespace Business.BusinessAspects
 {
@@ -18,7 +18,7 @@ namespace Business.BusinessAspects
         private IHttpContextAccessor _httpContextAccessor;
 
         public SecuredOperation(string roles)
-        {           //ayırıp arraye atmamızı sağlıyor
+        {
             _roles = roles.Split(',');
             _httpContextAccessor = ServiceTool.ServiceProvider.GetService<IHttpContextAccessor>();
 

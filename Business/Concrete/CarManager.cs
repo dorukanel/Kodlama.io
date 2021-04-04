@@ -12,6 +12,7 @@ using Entities.DTOs;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -26,11 +27,16 @@ namespace Business.Concrete
             _carDal = carDal;
           
         }
-       // [SecuredOperation("car.add,admin")]
+
+        [SecuredOperation("car.add,admin")]
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
-
+            IResult result = BusinessRules.Run(CheckIfCarNameExists(car.CarName));
+            if (result!=null)
+            {
+                return result;
+            }
             _carDal.Add(car);
             return new SuccessResult(Messages.CarAdded);
         }
@@ -73,6 +79,16 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<Car>(_carDal.Get(c => c.CarId == carId));
         }
-       
+
+        private IResult CheckIfCarNameExists(string carName)
+        {
+            var result = _carDal.GetAll(c => c.CarName == carName).Any();
+            if (result)
+            {
+                return new ErrorResult(Messages.CarAlreadyExists);
+            }
+
+            return new SuccessResult();
+        }
     }
 }

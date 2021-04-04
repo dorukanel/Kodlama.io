@@ -3,11 +3,13 @@ using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Business.Concrete;
+using DataAccess.Concrete.EntityFramework;
 
 namespace Business.ValidationRules.FluentValidation
 {
     public class CarValidator : AbstractValidator<Car>
-    {
+    { 
         public CarValidator()
         {
             RuleFor(c => c.CarName).MinimumLength(1); // Year 2021, Probably the genius behind vehicle industry is considering releasing a single-letter vehicle

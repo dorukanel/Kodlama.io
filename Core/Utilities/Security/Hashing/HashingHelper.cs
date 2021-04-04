@@ -16,7 +16,7 @@ namespace Core.Utilities.Security.Hashing
                 //string vermen yetmez bana byte olarak ver 
             }
         }
-        //kullanıcı şifreyi girdiğinde bu metod kullanılır 
+        //sifreyi dogrular
         public static bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
             using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
